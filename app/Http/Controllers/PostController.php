@@ -13,7 +13,7 @@ class PostController extends Controller
     {
         $posts = Post::latest()->SimplePaginate(5);
 
-        return view('dashboard', [
+        return view('post.index', [
             'posts' => $posts,
         ]);
     }
@@ -23,7 +23,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('post.create');
     }
 
     /**
