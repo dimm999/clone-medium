@@ -8,11 +8,16 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
+
+
+
 Route::get('/', [PostController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/post/create', [PostController::class, 'create'])->middleware(['auth', 'verified'])->name('post.create');
 
-https://youtu.be/MG1kt_wiIz0?t=7976
+https: //youtu.be/MG1kt_wiIz0?t=7976
+
+
 
 Route::get('/dashboard', [PostController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
@@ -22,4 +27,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
