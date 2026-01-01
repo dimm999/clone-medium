@@ -8,18 +8,22 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
+// https://youtu.be/MG1kt_wiIz0?t=9579
 
+Route::middleware(['auth', 'verified'])->group(function(){
+    Route::get('/', [PostController::class, 'index'])
+    ->name('dashboard');
 
+    Route::get('/post/create', [PostController::class, 'create'])
+    ->name('post.create');
 
-Route::get('/', [PostController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+    Route::post('/post/create', [PostController::class, 'store'])
+        ->name('post.store');
+});
 
-Route::get('/post/create', [PostController::class, 'create'])->middleware(['auth', 'verified'])->name('post.create');
-
-https: //youtu.be/MG1kt_wiIz0?t=7976
-
-
-
-Route::get('/dashboard', [PostController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [PostController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
