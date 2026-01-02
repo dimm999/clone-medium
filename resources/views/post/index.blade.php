@@ -10,7 +10,7 @@
             </div>
 
             <div class="mt-8">
-                <div class="p-4">
+                <div class="">
                     <ul class="flex flex-wrap text-sm font-medium text-gray-500 dark:text-gray-400">
                         @forelse ($posts as $p)
                             <x-post-item :post="$p" />

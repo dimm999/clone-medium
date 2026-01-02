@@ -10,20 +10,13 @@ use Illuminate\Support\Facades\Route;
 
 // https://youtu.be/MG1kt_wiIz0?t=9579
 
-Route::middleware(['auth', 'verified'])->group(function(){
-    Route::get('/', [PostController::class, 'index'])
-    ->name('dashboard');
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/', [PostController::class, 'index'])->name('dashboard');
 
-    Route::get('/post/create', [PostController::class, 'create'])
-    ->name('post.create');
+    Route::get('/post/create', [PostController::class, 'create'])->name('post.create');
 
-    Route::post('/post/create', [PostController::class, 'store'])
-        ->name('post.store');
+    Route::post('/post/create', [PostController::class, 'store'])->name('post.store');
 });
-
-Route::get('/dashboard', [PostController::class, 'index'])
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
