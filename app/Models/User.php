@@ -81,4 +81,9 @@ class User extends Authenticatable implements MustVerifyEmail
             ->where('follower_id', $user->id)
             ->exists();
     }
+
+    public function hasClapped(Post $post)
+    {
+        return $post->claps()->where('user_id', $this->id)->exists();
+    }
 }
