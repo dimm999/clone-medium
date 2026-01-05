@@ -9,21 +9,14 @@
                 </div>
             </div>
 
-            <div class="mt-8">
-                <div class="">
-                    <ul class="flex flex-wrap text-sm font-medium text-gray-500 dark:text-gray-400">
-                        @forelse ($posts as $p)
-                            <x-post-item :post="$p" />
-                        @empty
-                            <div>
-                                <p class="text-center text-gray-400 py-16">No posts found.</p>
-                            </div>
-                        @endforelse
-                    </ul>
-                </div>
-                {{ $posts->links() }}
+            <div class="mt-8 text-gray-900">
+                @forelse ($posts as $p)
+                    <x-post-item :post="$p"></x-post-item>
+                @empty
+                    <div class="text-center text-gray-400 py-16">No Posts Found</div>
+                @endforelse
             </div>
-
+             {{ $posts->links() }}
         </div>
     </div>
 </x-app-layout>

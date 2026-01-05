@@ -1,5 +1,6 @@
 @props(['post'])
 
+@auth
 <div x-data="{
     hasClapped: {{ auth()->user()->hasClapped($post) ? 'true' : 'false' }},
     count: {{ $post->claps()->count() }},
@@ -29,3 +30,4 @@ class="mt-8 py-4 border-t border-b">
         <span x-text="count"></span>
     </button>
 </div>
+@endauth
