@@ -7,15 +7,10 @@
 
                 {{-- User avatar --}}
                 <div class="flex gap-4">
-                    @if ($post->user->image)
-                        <img src="{{ $post->user->imgUrl() }}" alt="{{ $post->user->name }}" class="w-12 h-12 rounded-full">
-                    @else
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTM8DHhuej2UHjpwplhANUCt18PWBLFBtXfg&s"
-                            alt="{{ $post->user->name }}" class="w-12 h-12 rounded-full">
-                    @endif
+                    <x-user-avatar :user="$post->user" />
                     <div>
                         <div class="flex gap-2">
-                            <h3>{{ $post->user->username }}</h3>
+                            <a href="{{ route('profile.show', $post->user) }}" class="hover:underline">{{ $post->user->username }}</a>
                             &middot;
                             <a href="#" class="text-emerald-500">Follow</a>
                         </div>
