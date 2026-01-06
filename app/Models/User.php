@@ -89,7 +89,14 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
         // }
 
         // return null;
-        return $this->getFirstMedia('avatar')?->getUrl('avatar');
+        $media = $this->getFirstMedia('avatar');
+        if (!$media) {
+            return null;
+        }
+        if ($media->hasGeneratedConversion('avatar')) {
+            return $media->getUrl('avatar');
+        }
+        return $media->getUrl();
     }
 
     public function isFollowedBy(?User $user)

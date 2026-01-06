@@ -15,9 +15,15 @@ class PostController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
+        // \DB::listen(function ($query) {
+        //     \Log::info($query->sql);
+        // });
 
-        $query = Post::latest();
+        $user = auth()->user();
+
+        $query = Post::with(['user', 'media'])
+            ->withCount('claps')
+            ->latest();
         if($user) {
             $ids = $user->following()->pluck("users.id");
             $query->whereIn('user_id', $ids);
@@ -94,12 +100,31 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        if($post->user_id != Auth::id()) abort(403);
+        $post->delete();
+        return redirect()->route('dashboard');
     }
 
     public function category(Category $category)
     {
-        $posts = $category->posts()->latest()->simplePaginate(5);
+        $posts = $category->posts()
+            ->with(['user', 'media'])
+            ->withCount('claps')
+            ->latest()
+            ->simplePaginate(5);
+        return view('post.index', [
+            'posts'=> $posts,
+        ]);
+    }
+
+    public function myPosts()
+    {
+        $user = auth()->user();
+        $posts = $user->posts()
+            ->with(['user', 'media'])
+            ->withCount('claps')
+            ->latest()
+            ->simplePaginate(5);
         return view('post.index', [
             'posts'=> $posts,
         ]);
