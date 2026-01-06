@@ -9,7 +9,9 @@ class PublicProfileController extends Controller
 {
     public function show(User $user)
     {
-        $posts = $user->posts()->latest()->simplePaginate();
+        $posts = $user->posts()
+            ->where('published_at', '<=', now())
+            ->latest()->simplePaginate();
         return view('profile.show', [
             'user'=> $user,
             'posts' => $posts,

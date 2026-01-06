@@ -1,1 +1,1 @@
-<img src="/medium_logo.svg" class="h-4" alt="">
+<img src="/medium_clone.jpg" class="h-4" alt="">
